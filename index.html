@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tinopia — Creative Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+    <script src="services.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <div class="brand">
+                <span class="brand__mark">Tinopia</span>
+                <span class="brand__tagline">Creative Services</span>
+            </div>
+            <nav class="topnav">
+                <a href="#services">Services</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#service-details">Deep Dive</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a class="btn btn--ghost topbar__cta" href="#contact">Work with us</a>
+        </header>
+
+        <header class="hero" id="top">
+            <div class="hero__floating hero__floating--dot"></div>
+            <div class="hero__floating hero__floating--ring"></div>
+            <p class="eyebrow">Tinopia Services agency</p>
+            <h1 class="hero__title">Premium visuals, listings, and copy that move customers.</h1>
+            <p class="hero__subtitle">A modern partner for Shopify, Etsy, and digital-first brands.</p>
+            <div class="hero__actions">
+                <a class="btn btn--solid" href="#contact">Work with Us</a>
+                <a class="btn btn--ghost" href="#services">View services</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="section section--tight" id="services">
+                <div class="section__header">
+                    <p class="eyebrow">Overview</p>
+                    <div class="section__title-wrap">
+                        <h2 class="section__title">What We Deliver</h2>
+                        <p class="section__subtitle">A compact suite built for conversions and fast execution.</p>
+                    </div>
+                </div>
+                <div class="service-grid" id="service-grid"></div>
+            </section>
+
+            <section class="section section--padded" id="testimonials">
+                <div class="section__header">
+                    <p class="eyebrow">Testimonials</p>
+                    <div class="section__title-wrap">
+                        <h2 class="section__title">Clients on working with Tinopia</h2>
+                        <p class="section__subtitle">Signals from launches, rebrands, and ongoing retainers.</p>
+                    </div>
+                </div>
+                <div class="testimonials-grid" id="testimonials-grid"></div>
+            </section>
+
+            <section class="section section--padded" id="service-details">
+                <div class="section__header">
+                    <p class="eyebrow">Deep dives</p>
+                    <div class="section__title-wrap">
+                        <h2 class="section__title">How Each Service Feels In Motion</h2>
+                        <p class="section__subtitle">Pinned storytelling on the left, immersive gallery on the right.</p>
+                    </div>
+                </div>
+                <div class="services-scroll" id="services-scroll"></div>
+            </section>
+
+            <section class="section section--contact" id="contact">
+                <div class="contact-card">
+                    <p class="eyebrow">Let’s talk</p>
+                    <h3>Ready to build something that sells?</h3>
+                    <p>Tell me about your store, your targets, and where you need the biggest lift.</p>
+                    <div class="contact-actions">
+                        <a class="btn btn--solid" href="mailto:support@tinopia.com">Email Tinopia</a>
+                        <a class="btn btn--ghost" href="#top">Back to top</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="footer__brand">
+                <span class="brand__mark">Tinopia</span>
+                <p class="footer__text">Premium visuals, listings, and copy for digital-first brands.</p>
+            </div>
+            <div class="footer__links">
+                <a href="#services">Services</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#service-details">Deep Dive</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer__cta">
+                <a class="btn btn--solid" href="mailto:support@tinopia.com">Book a call</a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function setTopbarHeight() {
+          const topbar = document.querySelector(".topbar");
+          const stickyColumns = document.querySelectorAll(".service-sticky");
+      
+          if (topbar && stickyColumns.length) {
+            const height = topbar.offsetHeight + "px";
+            stickyColumns.forEach(el => el.style.setProperty("--topbar-height", height));
+          }
+        }
+      
+        // Run once DOM is loaded
+        document.addEventListener("DOMContentLoaded", setTopbarHeight);
+      
+        // Update on window resize to handle responsive layouts
+        window.addEventListener("resize", setTopbarHeight);
+      </script>
+      
+</body>
+
+
+</html>
