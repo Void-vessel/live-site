@@ -210,7 +210,7 @@ window.addEventListener("DOMContentLoaded", () => {
         ScrollTrigger.refresh();
     };
 
-    function handleFormSubmit(event) {
+    window.handleFormSubmit = function (event) {
         event.preventDefault();
         const btn = event.target.querySelector('button');
         const originalText = btn.innerHTML;
@@ -219,19 +219,38 @@ window.addEventListener("DOMContentLoaded", () => {
         btn.innerHTML = '<span>Sending...</span>';
         btn.style.opacity = '0.7';
         
-        // Simulate network request (Remove setTimeout and add your real fetch logic here)
-        setTimeout(() => {
-            btn.innerHTML = '<span>Message Sent!</span>';
-            btn.style.backgroundColor = '#10b981'; // Green color
-            event.target.reset();
-            
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.backgroundColor = '';
-                btn.style.opacity = '1';
-            }, 3000);
-        }, 1500);
+        const form = event.target;
+const formData = new FormData(form);
+
+fetch(form.action, {
+    method: "POST",
+    body: formData,
+    headers: {
+        Accept: "application/json"
     }
+})
+.then(response => {
+    if (response.ok) {
+        btn.innerHTML = '<span>Message Sent!</span>';
+        btn.style.backgroundColor = '#10b981';
+        form.reset();
+
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.backgroundColor = '';
+            btn.style.opacity = '1';
+        }, 3000);
+    } else {
+        throw new Error("Form submission failed");
+    }
+})
+.catch(() => {
+    btn.innerHTML = '<span>Error. Try again</span>';
+    btn.style.backgroundColor = '#ef4444'; // red
+    btn.style.opacity = '1';
+});
+    };
+
     
 
 

@@ -127,7 +127,11 @@
 
             <!-- Right Panel: The Form -->
             <div class="contact-form-panel">
-                <form id="modern-form" onsubmit="handleFormSubmit(event)">
+                <form  
+                id="modern-form"
+                action="https://formspree.io/f/mbdrrbkk"
+                method="POST"
+                onsubmit="handleFormSubmit(event)">
                     <h3 class="form-title">Send us a Message</h3>
                     
                     <div class="form-grid">
@@ -166,59 +170,59 @@
 
 
  <!-- SOFT & AIRY CONTACT SECTION -->
-<section id="contact" class="light-contact-section">
-    <div class="light-container">
-        
-        <!-- Left Side: Information -->
-        <div class="light-info">
-            <div>
-                <span class="light-eyebrow">Get in touch</span>
-                <h2>Let's level up your brand.</h2>
-                <p>We help e-commerce brands scale through better visuals and clearer messaging.</p>
+    <section id="contact" class="light-contact-section">
+        <div class="light-container">
+            
+            <!-- Left Side: Information -->
+            <div class="light-info">
+                <div>
+                    <span class="light-eyebrow">Get in touch</span>
+                    <h2>Let's level up your brand.</h2>
+                    <p>We help e-commerce brands scale through better visuals and clearer messaging.</p>
+                </div>
+    
+                <div class="light-stat-grid">
+                    <div class="stat-item">
+                        <h4>24h</h4>
+                        <span>Response time</span>
+                    </div>
+                    <div class="stat-item">
+                        <h4>150+</h4>
+                        <span>Projects launched</span>
+                    </div>
+                </div>
             </div>
-
-            <div class="light-stat-grid">
-                <div class="stat-item">
-                    <h4>24h</h4>
-                    <span>Response time</span>
-                </div>
-                <div class="stat-item">
-                    <h4>150+</h4>
-                    <span>Projects launched</span>
-                </div>
+    
+            <!-- Right Side: The Form -->
+            <div class="light-form-wrapper">
+                <form onsubmit="handleFormSubmit(event)">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="fname">First Name</label>
+                            <input type="text" id="fname" name="fname" class="soft-input" placeholder="Jane" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="lname">Last Name</label>
+                            <input type="text" id="lname" name="lname" class="soft-input" placeholder="Doe" required>
+                        </div>
+                        
+                        <div class="input-group full-width">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="soft-input" placeholder="jane@company.com" required>
+                        </div>
+    
+                        <div class="input-group full-width">
+                            <label for="message">How can we help?</label>
+                            <textarea id="message" name="message" class="soft-input" placeholder="Tell us about your project goals..." required></textarea>
+                        </div>
+                    </div>
+    
+                    <button type="submit" class="soft-btn">Send Message</button>
+                </form>
             </div>
+    
         </div>
-
-        <!-- Right Side: The Form -->
-        <div class="light-form-wrapper">
-            <form onsubmit="handleFormSubmit(event)">
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label for="fname">First Name</label>
-                        <input type="text" id="fname" name="fname" class="soft-input" placeholder="Jane" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="lname">Last Name</label>
-                        <input type="text" id="lname" name="lname" class="soft-input" placeholder="Doe" required>
-                    </div>
-                    
-                    <div class="input-group full-width">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" class="soft-input" placeholder="jane@company.com" required>
-                    </div>
-
-                    <div class="input-group full-width">
-                        <label for="message">How can we help?</label>
-                        <textarea id="message" name="message" class="soft-input" placeholder="Tell us about your project goals..." required></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="soft-btn">Send Message</button>
-            </form>
-        </div>
-
-    </div>
-</section>
+    </section>
 
 
 
