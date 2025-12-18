@@ -74,6 +74,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     const buildDetails = () => {
+
+
         if (!scrollEl) return;
         scrollEl.innerHTML = "";
 
@@ -82,19 +84,29 @@ window.addEventListener("DOMContentLoaded", () => {
             block.className = "service-block";
             block.id = `service-${service.slug}`;
 
+            
+        const badges = Array.isArray(service.badges) ? service.badges : [];
+
             const sticky = document.createElement("div");
+            //bg image setup
             sticky.className = "service-sticky";
+            if (service.bg) {
+                sticky.style.backgroundImage = `url('${service.bg}')`;
+                sticky.style.backgroundSize = "cover";
+                sticky.style.backgroundPosition = "top";
+                sticky.style.backgroundRepeat = "no-repeat";
+            }
             sticky.innerHTML = `
                 <div>
-                    <p class="eyebrow">${service.badges.join(" · ")}</p>
+                ${badges.length ? `<p class="eyebrow">${badges.join(" · ")}</p>` : ""}
                     <h3>${service.title}</h3>
                     <p>${service.description}</p>
                 </div>
-                <div class="service-meta">
-                    ${service.badges
-                        .map((badge) => `<span class="badge">${badge}</span>`)
-                        .join("")}
-                </div>
+                ${badges.length ? `
+                    <div class="service-meta">
+                        ${badges.map(badge => `<span class="badge">${badge}</span>`).join("")}
+                    </div>
+                ` : ""}
             `;
 
             const scroller = document.createElement("div");

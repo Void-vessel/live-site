@@ -387,11 +387,15 @@ a {
 }
 
 .service-sticky {
+    aspect-ratio: 1 / 4.1; /* width:height ratio */
+    max-width: 360px; /* example */
+    
+      
     padding: 32px;
     position: sticky;
     /* top: var(--topbar-height); */
     align-self: start;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -401,6 +405,7 @@ a {
 }
 
 .service-sticky h3 {
+    padding-top: 80px;
     margin: 0 0 6px;
     font-size: 1.4rem;
 }
@@ -417,7 +422,7 @@ a {
     margin-top: 24px;
 }
 
-.badge {
+/* .badge {
     padding: 6px 10px;
     border-radius: 10px;
     background: rgba(15, 23, 42, 0.05);
@@ -425,7 +430,7 @@ a {
     border: 1px solid var(--border);
     font-weight: 600;
     font-size: 0.85rem;
-}
+} */
 
 .service-scroller {
     padding: 32px;

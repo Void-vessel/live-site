@@ -6,7 +6,8 @@ const services = [
         summary: "End-to-end Shopify/Etsy upkeep, tuned for velocity and margin.",
         description: "From launch to monthly iterations: product drops, promos, reporting, and CRO tweaks that keep the shop profitable.",
         accent: "#0bd3d3",
-        badges: ["Shopify", "Etsy", "CRO"],
+        bg : "/images/ecom_sticky.png",
+        // badges: ["Shopify", "Etsy", "CRO"],
         items: [
             {
                 label: "Ops runway",
@@ -36,7 +37,7 @@ const services = [
         summary: "SEO-forward listing builds that surface faster and convert better.",
         description: "Keyword research meets sharp copy, clean media, and variant clarity so every SKU is easy to buy.",
         accent: "#7c3aed",
-        badges: ["SEO", "Conversion", "Research"],
+        // badges: ["SEO", "Conversion", "Research"],
         items: [
             {
                 label: "Keyword canvas",
@@ -66,7 +67,7 @@ const services = [
         summary: "Graphics and thumbnails that stay on-brand and thumb-stopping.",
         description: "Design sprints with style guides, reusable templates, and export packs for every platform.",
         accent: "#0ea5e9",
-        badges: ["Design", "Templates", "Thumbnails"],
+        // badges: ["Design", "Templates", "Thumbnails"],
         items: [
             {
                 label: "Style DNA",
@@ -96,7 +97,7 @@ const services = [
         summary: "Voice-consistent copy that sells without feeling pushy.",
         description: "Messaging frameworks, landing flows, and microcopy that keep customers moving forward.",
         accent: "#f97316",
-        badges: ["Voice", "Landing", "Email"],
+        // badges: ["Voice", "Landing", "Email"],
         items: [
             {
                 label: "Voice kit",
