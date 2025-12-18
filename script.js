@@ -210,6 +210,31 @@ window.addEventListener("DOMContentLoaded", () => {
         ScrollTrigger.refresh();
     };
 
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const btn = event.target.querySelector('button');
+        const originalText = btn.innerHTML;
+        
+        // Change button state
+        btn.innerHTML = '<span>Sending...</span>';
+        btn.style.opacity = '0.7';
+        
+        // Simulate network request (Remove setTimeout and add your real fetch logic here)
+        setTimeout(() => {
+            btn.innerHTML = '<span>Message Sent!</span>';
+            btn.style.backgroundColor = '#10b981'; // Green color
+            event.target.reset();
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.backgroundColor = '';
+                btn.style.opacity = '1';
+            }, 3000);
+        }, 1500);
+    }
+    
+
+
     buildGrid();
     buildTestimonials();
     buildDetails();

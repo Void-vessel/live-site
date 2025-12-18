@@ -80,18 +80,149 @@
                 <div class="services-scroll" id="services-scroll"></div>
             </section>
 
-            <section class="section section--contact" id="contact">
-                <div class="contact-card">
-                    <p class="eyebrow">Let’s talk</p>
-                    <h3>Ready to build something that sells?</h3>
-                    <p>Tell me about your store, your targets, and where you need the biggest lift.</p>
-                    <div class="contact-actions">
-                        <a class="btn btn--solid" href="mailto:support@tinopia.com">Email Tinopia</a>
-                        <a class="btn btn--ghost" href="#top">Back to top</a>
+<!-- MODERN CONTACT SECTION -->
+ <template>
+    <section id="contact" class="modern-contact-section">
+    <div class="contact-container">
+        <div class="contact-wrapper">
+            
+            <!-- Left Panel: Contact Info -->
+            <div class="contact-info">
+                <div class="circle-decor circle-1"></div>
+                <div class="circle-decor circle-2"></div>
+                
+                <div class="info-content">
+                    <h2>Get in Touch</h2>
+                    <p class="info-subtext">Ready to build something that sells? Tell us about your store and targets.</p>
+                    
+                    <div class="info-details">
+                        <div class="info-row">
+                            <div class="icon-box">
+                                <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                            </div>
+                            <div>
+                                <span class="label">Email</span>
+                                <a href="mailto:support@tinopia.com" class="value">support@tinopia.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-row">
+                            <div class="icon-box">
+                                <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                            </div>
+                            <div>
+                                <span class="label">Phone</span>
+                                <span class="value">+1 (555) 123-4567</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-icon">Twitter</a>
+                        <a href="#" class="social-icon">LinkedIn</a>
+                        <a href="#" class="social-icon">Instagram</a>
                     </div>
                 </div>
-            </section>
-        </main>
+            </div>
+
+            <!-- Right Panel: The Form -->
+            <div class="contact-form-panel">
+                <form id="modern-form" onsubmit="handleFormSubmit(event)">
+                    <h3 class="form-title">Send us a Message</h3>
+                    
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        
+                        <div class="input-group full-width">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Project Inquiry">
+                        </div>
+                        
+                        <div class="input-group full-width">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..." required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>Send Message</span>
+                        <svg xmlns="http://www.w3.org/2000/svg"fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    </section>
+ </template>
+
+
+ <!-- SOFT & AIRY CONTACT SECTION -->
+<section id="contact" class="light-contact-section">
+    <div class="light-container">
+        
+        <!-- Left Side: Information -->
+        <div class="light-info">
+            <div>
+                <span class="light-eyebrow">Get in touch</span>
+                <h2>Let's level up your brand.</h2>
+                <p>We help e-commerce brands scale through better visuals and clearer messaging.</p>
+            </div>
+
+            <div class="light-stat-grid">
+                <div class="stat-item">
+                    <h4>24h</h4>
+                    <span>Response time</span>
+                </div>
+                <div class="stat-item">
+                    <h4>150+</h4>
+                    <span>Projects launched</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: The Form -->
+        <div class="light-form-wrapper">
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="fname" class="soft-input" placeholder="Jane" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lname" class="soft-input" placeholder="Doe" required>
+                    </div>
+                    
+                    <div class="input-group full-width">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" class="soft-input" placeholder="jane@company.com" required>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label for="message">How can we help?</label>
+                        <textarea id="message" name="message" class="soft-input" placeholder="Tell us about your project goals..." required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="soft-btn">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+
+
+                    </main>
         <footer class="footer">
             <div class="footer__brand">
                 <span class="brand__mark">Tinopia</span>
