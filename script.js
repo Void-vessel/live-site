@@ -220,36 +220,59 @@ window.addEventListener("DOMContentLoaded", () => {
         btn.style.opacity = '0.7';
         
         const form = event.target;
-const formData = new FormData(form);
+        const formData = new FormData(form);
 
-fetch(form.action, {
-    method: "POST",
-    body: formData,
-    headers: {
-        Accept: "application/json"
-    }
-})
-.then(response => {
-    if (response.ok) {
-        btn.innerHTML = '<span>Message Sent!</span>';
-        btn.style.backgroundColor = '#10b981';
-        form.reset();
+        fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                Accept: "application/json"
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                btn.innerHTML = '<span>Message Sent!</span>';
+                btn.style.backgroundColor = '#10b981';
+                form.reset();
 
-        setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.style.backgroundColor = '';
-            btn.style.opacity = '1';
-        }, 3000);
-    } else {
-        throw new Error("Form submission failed");
-    }
-})
-.catch(() => {
-    btn.innerHTML = '<span>Error. Try again</span>';
-    btn.style.backgroundColor = '#ef4444'; // red
-    btn.style.opacity = '1';
-});
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.backgroundColor = '';
+                    btn.style.opacity = '1';
+                }, 3000);
+            } else {
+                throw new Error("Form submission failed");
+            }
+        })
+        .catch(() => {
+        btn.innerHTML = '<span>Error. Try again</span>';
+        btn.style.backgroundColor = '#ef4444'; // red
+        btn.style.opacity = '1';
+        });
     };
+
+
+    const toggle = document.getElementById("dark-mode-toggle");
+
+toggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("theme", "dark");
+        toggle.textContent = "☀ Light";
+    } else {
+        localStorage.setItem("theme", "light");
+        toggle.textContent = "🌙 Dark";
+    }
+});
+
+// Load saved preference
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+    toggle.textContent = "☀ Light";
+}
+
+
 
     
 
