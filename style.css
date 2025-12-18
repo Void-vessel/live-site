@@ -389,7 +389,7 @@ a {
 .service-sticky {
     padding: 32px;
     position: sticky;
-    top: var(--topbar-height);
+    /* top: var(--topbar-height); */
     align-self: start;
     height: 100vh;
     display: flex;

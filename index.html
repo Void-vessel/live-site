@@ -108,23 +108,7 @@
             </div>
         </footer>
     </div>
-    <script>
-        function setTopbarHeight() {
-          const topbar = document.querySelector(".topbar");
-          const stickyColumns = document.querySelectorAll(".service-sticky");
-      
-          if (topbar && stickyColumns.length) {
-            const height = topbar.offsetHeight + "px";
-            stickyColumns.forEach(el => el.style.setProperty("--topbar-height", height));
-          }
-        }
-      
-        // Run once DOM is loaded
-        document.addEventListener("DOMContentLoaded", setTopbarHeight);
-      
-        // Update on window resize to handle responsive layouts
-        window.addEventListener("resize", setTopbarHeight);
-      </script>
+    
       
 </body>
 
