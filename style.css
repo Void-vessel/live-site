@@ -387,7 +387,7 @@ a {
 }
 
 .service-sticky {
-    aspect-ratio: 1 / 4.1; /* width:height ratio */
+    aspect-ratio: 1 / 3; /* width:height ratio */
     max-width: 360px; /* example */
     
       
