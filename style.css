@@ -347,7 +347,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;         /* Prevent it from getting squished */
-    margin-left: 10px; /* <--- ADD THIS LINE to separate it from the other button */
+    margin-left: 0; /* <--- ADD THIS LINE to separate it from the other button */
 }
 
 .theme-toggle:hover {
@@ -801,50 +801,165 @@ textarea.soft-input {
 
 /* --- FOOTER --- */
 
-.footer {
-    padding: 32px 5vw 48px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-    align-items: start;
+/* --- MODERN RESPONSIVE FOOTER --- */
+
+.modern-footer {
+    background: var(--panel);
     border-top: 1px solid var(--border);
-    background: radial-gradient(circle at 20% 20%, rgba(var(--accent-rgb), 0.08), transparent 40%), var(--panel);
+    padding: 80px 5vw 24px;
+    margin-top: auto;
 }
 
-.footer__brand {
+.footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
     display: grid;
-    gap: 6px;
+    /* Desktop: 3 distinct columns */
+    grid-template-columns: 1.5fr 2fr 1.2fr; 
+    gap: 60px;
+    margin-bottom: 60px;
 }
 
-.footer__text {
-    margin: 0;
-    color: var(--muted);
-}
-
-.footer__links {
+/* Column General Styling */
+.footer-col {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px 16px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
 }
 
-.footer__links a {
+.brand-col .brand {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.footer-col h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
     color: var(--text);
-    font-weight: 600;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.footer__cta {
-    justify-self: end;
-}
-
-.footer__social {
-    display: flex;
-    gap: 10px;
-}
-
-.footer__social a {
+.footer-desc {
     color: var(--muted);
-    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 320px;
 }
+
+/* Links Styling */
+.footer-col a:not(.btn) {
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.footer-col a:not(.btn):hover {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+/* Link Group Wrapper */
+.footer-links-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.footer-col a.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+}
+
+
+
+.footer-col a.social-link:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Bottom Copyright Bar */
+.footer-bottom {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 900px) {
+    .footer-container {
+        /* Switch to single column stack */
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .footer-links-group {
+        /* Keep links side-by-side on tablet/mobile if possible */
+        grid-template-columns: 1fr 1fr; 
+        gap: 20px;
+        width: 100%;
+    }
+    
+    .footer-desc {
+        max-width: 100%; /* Full width text on mobile */
+    }
+
+    .cta-col {
+        background: var(--bg); /* Slight highlight for CTA area on mobile */
+        padding: 24px;
+        border-radius: var(--radius);
+        align-items: center;
+        text-align: center;
+    }
+    
+    .cta-col .btn {
+        width: 100%; /* Full width button for easier tapping */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links-group {
+        /* On very small screens, stack the link lists too */
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .modern-footer {
+        padding: 60px 20px 24px;
+    }
+}
+
 
 /* --- MEDIA QUERIES --- */
 
