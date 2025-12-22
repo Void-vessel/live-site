@@ -252,31 +252,86 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    const toggle = document.getElementById("dark-mode-toggle");
+    // --- THEME TOGGLE (Handles Multiple Buttons) ---
+    // Select ALL theme buttons (Mobile & Desktop)
+    // --- THEME TOGGLE (Cleaned for Multiple Buttons) ---
+    const themeToggles = document.querySelectorAll(".theme-toggle");
 
-toggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
+    const updateThemeUI = (isDark) => {
+        themeToggles.forEach(btn => {
+            // Update text only if the button is the desktop version
+            if (btn.classList.contains('desktop-theme-btn')) {
+                 btn.textContent = isDark ? "☀ Light" : "🌙 Dark";
+            } else {
+                 btn.textContent = isDark ? "☀" : "🌙"; // Icon only for mobile
+            }
+        });
+    };
 
-    if(document.body.classList.contains("dark-mode")){
-        localStorage.setItem("theme", "dark");
-        toggle.textContent = "☀ Light";
+    // 1. Check saved theme on load
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        updateThemeUI(true);
     } else {
-        localStorage.setItem("theme", "light");
-        toggle.textContent = "🌙 Dark";
+        updateThemeUI(false);
     }
-});
 
-// Load saved preference
-if(localStorage.getItem("theme") === "dark"){
-    document.body.classList.add("dark-mode");
-    toggle.textContent = "☀ Light";
-}
+    // 2. Add click listeners to ALL toggle buttons
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            const isDark = document.body.classList.contains("dark-mode");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            updateThemeUI(isDark);
+        });
+    });
 
+    // --- MOBILE OFF-CANVAS MENU ---
+    const menuToggle = document.querySelector(".mobile-toggle");
+    const navWrapper = document.getElementById("nav-wrapper");
+    const navLinks = document.querySelectorAll(".nav-link");
 
+    // Define the backdrop element
+    const navBackdrop = document.getElementById("nav-backdrop");
 
+    const setMenuOpen = (isOpen) => {
+        if (!menuToggle || !navWrapper) return;
+        
+        // Toggle Menu
+        navWrapper.classList.toggle("is-open", isOpen);
+        document.body.classList.toggle("menu-open", isOpen);
+        menuToggle.classList.toggle("is-open", isOpen);
+        menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+        // FIX: Toggle Backdrop Visibility
+        if (navBackdrop) {
+            navBackdrop.classList.toggle("is-visible", isOpen);
+        }
+    };
     
+    // FIX: Add click listener to backdrop to close menu
+    if (navBackdrop) {
+        navBackdrop.addEventListener("click", () => setMenuOpen(false));
+    }
 
+    if (menuToggle && navWrapper) {
+        menuToggle.addEventListener("click", () => {
+            const isOpen = !navWrapper.classList.contains("is-open");
+            setMenuOpen(isOpen);
+        });
 
+        navLinks.forEach((link) => {
+            link.addEventListener("click", () => setMenuOpen(false));
+        });
+
+        // Close on Escape key
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && navWrapper.classList.contains("is-open")) {
+                setMenuOpen(false);
+            }
+        });
+    }
     buildGrid();
     buildTestimonials();
     buildDetails();

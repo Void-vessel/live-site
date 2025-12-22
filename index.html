@@ -26,22 +26,41 @@
                 <span class="brand__tagline">Creative Services</span>
             </div>
         
-            <nav class="topnav">
-                <a href="#services">Services</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#service-details">Deep Dive</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        
-            <!-- ADD THIS WRAPPER -->
-            <div class="topbar__right">
-                <a class="btn btn--ghost topbar__cta" href="#contact">Work with us</a>
-                <button id="dark-mode-toggle" class="theme-toggle">
-                    <!-- You can add a moon icon SVG here if you want -->
-                    🌙 
+            <div class="mobile-actions">
+                <button class="theme-toggle mobile-theme-btn" aria-label="Toggle Dark Mode">
+                    🌙
+                </button>
+                <button class="mobile-toggle" aria-label="Open navigation" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
                 </button>
             </div>
+        
+            <div class="nav-wrapper" id="nav-wrapper">
+                
+                <div class="mobile-nav-header">
+                    <span class="brand__mark">Tinopia</span>
+                </div>
+        
+                <nav class="topnav">
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                    <a href="#service-details" class="nav-link">Process</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+        
+                <div class="topbar__right">
+                    <button class="theme-toggle desktop-theme-btn" id="dark-mode-toggle" aria-label="Toggle Dark Mode">
+                        🌙 Dark
+                    </button>
+                    <a href="#contact" class="btn btn--solid topbar__cta">Start a Project</a>
+                </div>
+            </div>
         </header>
+
+
+        <div class="nav-backdrop" id="nav-backdrop"></div>
 
         <header class="hero" id="top">
             <div class="hero__floating hero__floating--dot"></div>
