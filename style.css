@@ -1246,84 +1246,88 @@ h6 {
 @media (max-width: 768px) {
 
     /* =========================================
-       1. RESTORE AUTO-SCROLL (MARQUEE)
+       1. AUTO-SCROLL (MARQUEE) SETUP
        ========================================= */
 
     .marquee-container {
         overflow: hidden;
-        /* Hide the scrollbar so it looks like an animation */
+        /* Disable swipe scrolling to allow animation */
         display: block;
-        /* Re-apply the fade mask for mobile */
-        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+
+        /* Ensure the container listens for touches */
+        touch-action: pan-y;
+        -webkit-user-select: none;
+        user-select: none;
     }
 
     .marquee-track {
-        /* Force animation to run on mobile */
-        animation: scrollMarquee 30s linear infinite !important;
-        width: max-content;
+        display: flex;
         gap: 16px;
-    }
+        width: max-content;
+        padding-right: 0;
 
-    /* PAUSE when touching/holding anywhere on the track */
-    .marquee-track:active {
-        animation-play-state: paused;
+        /* FORCE Animation on Mobile */
+        animation: scrollMarquee 25s linear infinite !important;
+
+        /* Trick iOS into handling touch events */
+        cursor: pointer;
     }
 
     /* =========================================
-       2. CARD SIZING
+       2. FORCE PAUSE ON TOUCH (The Fix)
+       ========================================= */
+
+    /* We target every possible interaction state to ensure it stops */
+    .marquee-container:active .marquee-track,
+    .marquee-container:focus-within .marquee-track,
+    .marquee-track:active,
+    .marquee-track:focus,
+    .marquee-track:hover {
+        animation-play-state: paused !important;
+    }
+
+    /* =========================================
+       3. CARD VISIBILITY (Always Open)
        ========================================= */
     .testimonial-card-v2 {
         flex: 0 0 280px;
-        /* Keep width manageable */
         height: 320px;
-        /* Taller to fit logo + text visible */
         margin-right: 0;
+
+        /* Ensure the card itself triggers the pause when touched */
         pointer-events: auto;
-        /* Ensure touches register */
+        position: relative;
     }
 
     /* =========================================
-       3. LOGO: ALWAYS AT TOP (No Hover Needed)
+       4. LOGO & TEXT PLACEMENT
        ========================================= */
 
+    /* Logo pinned to top */
     .testimonial-card-v2 .logo-wrapper {
         height: 50px;
         top: 25px;
-        /* Pin to top permanently */
         left: 50%;
-
-        /* Force Scale 1 (No shrinking) and Center X */
         transform: translate(-50%, 0) scale(1) !important;
-
         opacity: 1;
         z-index: 5;
     }
 
-    /* =========================================
-       4. TEXT: ALWAYS VISIBLE (No Hover Needed)
-       ========================================= */
-
+    /* Text always visible below logo */
     .testimonial-card-v2 .content-reveal {
         opacity: 1;
-        /* Always visible */
         transform: translateY(0);
-        /* Always in final position */
-
-        /* Create space for the logo at the top */
         padding-top: 80px;
         padding-bottom: 20px;
         pointer-events: auto;
     }
 
-    /* Font Adjustments for legibility */
     .t-quote {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         margin-top: 10px;
-        margin-bottom: 10px;
-        line-height: 1.4;
-
-        /* Clamp text to ensure it fits in the box */
+        line-height: 1.5;
         display: -webkit-box;
         -webkit-line-clamp: 6;
         -webkit-box-orient: vertical;
