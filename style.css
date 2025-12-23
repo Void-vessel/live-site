@@ -648,37 +648,7 @@ h6 {
 /* =========================================
    8. TESTIMONIALS
    ========================================= */
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-    width: 100%;
-}
 
-.testimonial-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-    display: grid;
-    gap: 12px;
-}
-
-.testimonial-quote {
-    margin: 0;
-    color: var(--text);
-    font-weight: 600;
-}
-
-.testimonial-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    color: var(--muted);
-    font-size: 0.95rem;
-}
 
 /* =========================================
    9. CONTACT FORM
@@ -1054,5 +1024,163 @@ h6 {
 
     .nav-wrapper {
         flex: 0 0 auto;
+    }
+}
+
+
+/* --- INFINITE TESTIMONIAL MARQUEE --- */
+
+.marquee-container {
+    position: relative;
+    width: 100vw;
+    /* Full viewport width */
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    /* Center fully */
+    margin-right: -50vw;
+    overflow: hidden;
+    /* Hide the scrollbar */
+    padding: 20px 0;
+    /* Mask for side fading effect */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    /* Force width to fit all items */
+    /* Animation speed: 40s. Adjust for faster/slower */
+    padding-right: 24px;
+    animation: scrollMarquee 60s linear infinite;
+    /* Increased to 60s so it doesn't fly too fast */
+}
+
+/* Pause on hover so users can read */
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scrollMarquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* Move half way (since we duplicate content) */
+}
+
+/* --- NEW CARD CARD DESIGN --- */
+.testimonial-card-v2 {
+    /* Slightly reduced padding to give the big logo more breathing room */
+    padding: 24px 24px;
+
+    flex: 0 0 350px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* 1. Logo Styling */
+.t-logo {
+    /* 3. The Constraint Logic */
+    height: 100%;
+    /* Try to fill the 100px height... */
+    width: auto;
+    /* ...while keeping aspect ratio */
+
+    /* 4. The Safety Stop */
+    /* Stops the logo from hitting the edges of the card */
+    max-width: 260px;
+
+    object-fit: contain;
+    /* Ensures the 5000px image scales down crisply */
+    transition: opacity 0.3s ease;
+}
+
+/* Default (Light Mode) Logic */
+.logo-light {
+    display: block;
+}
+
+.logo-dark {
+    display: none;
+}
+
+/* Dark Mode Logic */
+[data-theme="dark"] .logo-light {
+    display: none;
+}
+
+[data-theme="dark"] .logo-dark {
+    display: block;
+}
+
+.logo-wrapper {
+    /* 1. Set a ceiling for height. 
+       For 2:1 logos, 100px height allows them to be ~200px wide naturally. */
+    height: 100px;
+
+    width: 100%;
+
+    /* 2. Space between logo and text */
+    margin-bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-card-v2:hover .t-logo {
+    filter: grayscale(0%);
+    /* Color on hover */
+}
+
+/* 2. Quote Styling */
+.t-quote {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 24px;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* 3. Stars Styling */
+.t-stars {
+    color: #fbbf24;
+    /* Gold color */
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+/* .t-author {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.t-author strong {
+    color: var(--text);
+    display: block;
+} */
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .testimonial-card-v2 {
+        flex: 0 0 280px;
+        /* Smaller card on mobile */
+        padding: 24px 16px;
     }
 }

@@ -130,34 +130,49 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     /**
-     * Renders the Testimonials Grid.
+     * Renders the Testimonial Marquee with Star Ratings
      */
     const buildTestimonials = () => {
-        if (!testimonialsEl) return;
+        const track = document.getElementById("testimonials-track");
+        if (!track || !window.testimonials) return;
 
-        const list = window.testimonials;
+        // 1. Helper to generate Star SVGs
+        const getStars = (count) => {
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                // Fill color if i < count, else lighter gray (empty)
+                const fill = i < count ? 'currentColor' : 'var(--border)';
+                starsHtml += `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="${fill}" stroke="none">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                `;
+            }
+            return starsHtml;
+        };
 
-        // Handle empty data gracefully
-        if (!list || list.length === 0) {
-            console.warn("Testimonials data missing or empty.");
-            testimonialsEl.innerHTML = "<p style='color: var(--muted); padding: 20px;'>No testimonials loaded.</p>";
-            return;
-        }
-
-        testimonialsEl.innerHTML = "";
-
-        list.forEach((t) => {
-            const card = document.createElement("article");
-            card.className = "testimonial-card";
-            card.innerHTML = `
-                <p class="testimonial-quote">"${t.quote}"</p>
-                <div class="testimonial-meta">
-                    <span>${t.name} · ${t.role}</span>
-                    <span class="testimonial-chip">${t.highlight}</span>
+        // 2. Generate Card HTML with TWO Logo Images
+        const createCardHtml = (t) => `
+            <div class="testimonial-card-v2">
+                <div class="logo-wrapper">
+                    <img src="${t.logo_light}" alt="${t.name}" class="t-logo logo-light">
+                    <img src="${t.logo_dark}" alt="${t.name}" class="t-logo logo-dark">
                 </div>
-            `;
-            testimonialsEl.appendChild(card);
-        });
+                
+                <p class="t-quote">"${t.quote}"</p>
+                
+                <div>
+                    <div class="t-stars">${getStars(t.rating)}</div>
+                </div>
+            </div>
+        `;
+
+        // 3. Generate content
+        // We map the data to HTML strings
+        const cardsHtml = window.testimonials.map(createCardHtml).join('');
+
+        // 4. DUPLICATE content for infinite loop (Set A + Set B)
+        track.innerHTML = cardsHtml + cardsHtml + cardsHtml + cardsHtml;
     };
 
 
