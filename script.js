@@ -158,11 +158,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="${t.logo_light}" alt="${t.name}" class="t-logo logo-light">
                     <img src="${t.logo_dark}" alt="${t.name}" class="t-logo logo-dark">
                 </div>
-                
-                <p class="t-quote">"${t.quote}"</p>
-                
-                <div>
-                    <div class="t-stars">${getStars(t.rating)}</div>
+        
+                <div class="content-reveal">
+                    <p class="t-quote">"${t.quote}"</p>
+                    <div>
+                        <div class="t-stars">${getStars(t.rating)}</div>
+                    </div>
                 </div>
             </div>
         `;

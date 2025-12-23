@@ -1059,8 +1059,27 @@ h6 {
 }
 
 /* Pause on hover so users can read */
-.marquee-track:hover {
-    animation-play-state: paused;
+/* --- INTELLIGENT MARQUEE PAUSING --- */
+
+/* 1. Desktop: Pause when mouse is over it */
+@media (hover: hover) {
+    .marquee-track:hover {
+        animation-play-state: paused;
+    }
+}
+
+/* 2. Mobile: Pause ONLY while finger is touching (Active) */
+@media (hover: none) {
+
+    /* If the "hover" gets stuck (sticky tap), force it to keep moving */
+    .marquee-track:hover {
+        animation-play-state: running;
+    }
+
+    /* Only pause if the user is physically holding their finger down */
+    .marquee-track:active {
+        animation-play-state: paused;
+    }
 }
 
 @keyframes scrollMarquee {
@@ -1075,39 +1094,102 @@ h6 {
     /* Move half way (since we duplicate content) */
 }
 
-/* --- NEW CARD CARD DESIGN --- */
-.testimonial-card-v2 {
-    /* Slightly reduced padding to give the big logo more breathing room */
-    padding: 24px 24px;
+/* --- INTERACTIVE REVEAL CARD --- */
 
+.testimonial-card-v2 {
+    /* 1. Fixed Dimensions are crucial for this effect */
     flex: 0 0 350px;
+    height: 350px;
+    /* Needs to be tall enough to hold text on hover */
+
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+
+    /* 2. Layout Logic */
+    position: relative;
+    overflow: hidden;
+    /* Clips the text that is "sliding up" */
+    padding: 30px;
+
+    /* Smooth hover transition for the card border/shadow */
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+}
+
+/* --- THE LOGO (Default: Centered) --- */
+.logo-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Perfectly centered */
+
+    width: 80%;
+    height: 100px;
+
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    justify-content: space-between;
-    height: 100%;
+
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 2;
+    /* Sits above background */
 }
 
 /* 1. Logo Styling */
 .t-logo {
-    /* 3. The Constraint Logic */
-    height: 100%;
-    /* Try to fill the 100px height... */
-    width: auto;
-    /* ...while keeping aspect ratio */
-
-    /* 4. The Safety Stop */
-    /* Stops the logo from hitting the edges of the card */
-    max-width: 260px;
-
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
-    /* Ensures the 5000px image scales down crisply */
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s;
+}
+
+
+/* --- THE TEXT CONTENT (Default: Hidden below) --- */
+.content-reveal {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+
+    /* Push it down out of view */
+    transform: translateY(100%);
+    opacity: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+}
+
+
+/* --- HOVER STATES --- */
+
+/* 1. When hovering the card... */
+.testimonial-card-v2:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent);
+}
+
+/* 2. ...Move the Logo Up */
+.testimonial-card-v2:hover .logo-wrapper {
+    top: 40px;
+    /* Distance from top */
+    left: 50%;
+    transform: translate(-50%, 0) scale(0.8);
+    /* Move up and shrink 20% */
+}
+
+/* 3. ...Slide the Text Up */
+.testimonial-card-v2:hover .content-reveal {
+    transform: translateY(0);
+    /* Slide into natural place */
+    opacity: 1;
 }
 
 /* Default (Light Mode) Logic */
@@ -1128,42 +1210,24 @@ h6 {
     display: block;
 }
 
-.logo-wrapper {
-    /* 1. Set a ceiling for height. 
-       For 2:1 logos, 100px height allows them to be ~200px wide naturally. */
-    height: 100px;
 
-    width: 100%;
 
-    /* 2. Space between logo and text */
-    margin-bottom: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.testimonial-card-v2:hover .t-logo {
-    filter: grayscale(0%);
-    /* Color on hover */
-}
-
-/* 2. Quote Styling */
+/* --- TYPOGRAPHY UPDATES --- */
 .t-quote {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
+    margin-top: 60px;
+    /* Add space so text doesn't hit the logo */
+    margin-bottom: 20px;
     color: var(--text);
-    margin-bottom: 24px;
     font-style: italic;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
-/* 3. Stars Styling */
 .t-stars {
     color: #fbbf24;
-    /* Gold color */
     display: flex;
     gap: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
 /* .t-author {
@@ -1176,11 +1240,93 @@ h6 {
     display: block;
 } */
 
-/* Mobile Responsiveness */
+
+/* --- MOBILE LAYOUT & INTERACTION --- */
+/* --- MOBILE LAYOUT & INTERACTION --- */
 @media (max-width: 768px) {
+
+    /* =========================================
+       1. RESTORE AUTO-SCROLL (MARQUEE)
+       ========================================= */
+
+    .marquee-container {
+        overflow: hidden;
+        /* Hide the scrollbar so it looks like an animation */
+        display: block;
+        /* Re-apply the fade mask for mobile */
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .marquee-track {
+        /* Force animation to run on mobile */
+        animation: scrollMarquee 30s linear infinite !important;
+        width: max-content;
+        gap: 16px;
+    }
+
+    /* PAUSE when touching/holding anywhere on the track */
+    .marquee-track:active {
+        animation-play-state: paused;
+    }
+
+    /* =========================================
+       2. CARD SIZING
+       ========================================= */
     .testimonial-card-v2 {
         flex: 0 0 280px;
-        /* Smaller card on mobile */
-        padding: 24px 16px;
+        /* Keep width manageable */
+        height: 320px;
+        /* Taller to fit logo + text visible */
+        margin-right: 0;
+        pointer-events: auto;
+        /* Ensure touches register */
+    }
+
+    /* =========================================
+       3. LOGO: ALWAYS AT TOP (No Hover Needed)
+       ========================================= */
+
+    .testimonial-card-v2 .logo-wrapper {
+        height: 50px;
+        top: 25px;
+        /* Pin to top permanently */
+        left: 50%;
+
+        /* Force Scale 1 (No shrinking) and Center X */
+        transform: translate(-50%, 0) scale(1) !important;
+
+        opacity: 1;
+        z-index: 5;
+    }
+
+    /* =========================================
+       4. TEXT: ALWAYS VISIBLE (No Hover Needed)
+       ========================================= */
+
+    .testimonial-card-v2 .content-reveal {
+        opacity: 1;
+        /* Always visible */
+        transform: translateY(0);
+        /* Always in final position */
+
+        /* Create space for the logo at the top */
+        padding-top: 80px;
+        padding-bottom: 20px;
+        pointer-events: auto;
+    }
+
+    /* Font Adjustments for legibility */
+    .t-quote {
+        font-size: 0.85rem;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        line-height: 1.4;
+
+        /* Clamp text to ensure it fits in the box */
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 }
