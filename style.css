@@ -1,77 +1,86 @@
+/* =========================================
+   1. VARIABLES & THEME
+   ========================================= */
 :root {
-    /* --- COLOR & THEME VARIABLES --- */
-    
-    /* Base Colors */
+    /* --- Base Colors --- */
     --bg: #f6f7fb;
     --panel: #ffffff;
     --text: #0f172a;
     --muted: #5b6477;
     --border: #e5e7eb;
-    
-    /* Brand Accents */
+
+    /* --- Brand Accents --- */
     --accent: #0bd3d3;
     --accent-2: #7c3aed;
-    
-    /* RGB Values for Glassmorphism/Opacity effects */
+
+    /* --- RGB Values (For Opacity/Glass) --- */
     --bg-rgb: 246, 247, 251;
     --panel-rgb: 255, 255, 255;
     --accent-rgb: 11, 211, 211;
     --accent-2-rgb: 124, 58, 237;
     --text-rgb: 15, 23, 42;
-    
-    /* Derived Colors (for coherency) */
-    --bg-subtle: #f1f5f9;      /* Slightly darker than panel for inputs/info areas */
-    --glass-bg: rgba(246, 247, 251, 0.85); /* For topbar */
-    
-    /* Shadows & Radius */
+
+    /* --- Derived Colors --- */
+    --bg-subtle: #f1f5f9;
+    --glass-bg: rgba(246, 247, 251, 0.85);
+
+    /* --- UI Properties --- */
     --shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
     --shadow-hover: 0 25px 70px rgba(15, 23, 42, 0.12);
     --radius: 20px;
-    
-    /* Layout Variables (Preserved) */
     --max-width: 1160px;
     --topbar-height: 60px;
 }
 
+/* --- Dark Mode Override --- */
 .dark-mode {
-    /* Dark Mode Palette */
-    --bg: #020617;        /* Deep Blue/Black */
-    --panel: #0f172a;     /* Slate 900 */
-    --text: #f8fafc;      /* Slate 50 */
-    --muted: #94a3b8;     /* Slate 400 */
-    --border: #1e293b;    /* Slate 800 */
-    
-    /* RGB Values for Dark Mode */
+    --bg: #020617;
+    --panel: #0f172a;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --border: #1e293b;
+
+    /* RGB overrides */
     --bg-rgb: 2, 6, 23;
     --panel-rgb: 15, 23, 42;
     --text-rgb: 248, 250, 252;
-    
-    /* Adjusted Accents for Dark Mode (Brighter/Softer) */
-    --accent: #22d3ee;    /* Cyan 400 */
-    --accent-2: #a78bfa;  /* Violet 400 */
+
+    /* Adjusted Accents */
+    --accent: #22d3ee;
+    --accent-2: #a78bfa;
     --accent-rgb: 34, 211, 238;
     --accent-2-rgb: 167, 139, 250;
-    
-    --bg-subtle: #1e293b;  /* Lighter than panel */
+
+    --bg-subtle: #1e293b;
     --glass-bg: rgba(15, 23, 42, 0.85);
-    
     --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     --shadow-hover: 0 25px 70px rgba(0, 0, 0, 0.6);
 }
 
-
+/* =========================================
+   2. GLOBAL RESET & BASE
+   ========================================= */
 * {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
     transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Prevent scroll when mobile menu is open */
+body.menu-open {
+    overflow: hidden;
 }
 
 img {
@@ -86,8 +95,14 @@ a {
     transition: color 0.2s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--text);
+    margin-top: 0;
 }
 
 .page-shell {
@@ -96,26 +111,124 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
 }
 
-/* --- TOPBAR --- */
+/* =========================================
+   3. UTILITY CLASSES (Buttons, Chips)
+   ========================================= */
+
+/* --- Buttons --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn--solid {
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    color: #ffffff;
+    box-shadow: 0 15px 40px rgba(var(--accent-rgb), 0.3);
+}
+
+.dark-mode .btn--solid {
+    color: #0f172a;
+}
+
+.btn--ghost {
+    background: rgba(var(--accent-2-rgb), 0.08);
+    color: var(--accent-2);
+    border-color: rgba(var(--accent-2-rgb), 0.25);
+}
+
+/* --- Theme Toggle Button --- */
+.theme-toggle {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 0;
+}
+
+.theme-toggle:hover {
+    background: rgba(15, 23, 42, 0.05);
+    color: var(--accent);
+}
+
+.theme-toggle svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+/* --- Chips & Typography --- */
+.chip {
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-weight: 700;
+    background: rgba(var(--text-rgb), 0.04);
+    color: var(--text);
+    display: inline-block;
+}
+
+.chip--metric {
+    background: rgba(var(--accent-rgb), 0.1);
+    border-color: rgba(var(--accent-rgb), 0.2);
+    color: var(--accent);
+}
+
+.chip--tag {
+    background: rgba(var(--accent-2-rgb), 0.1);
+    border-color: rgba(var(--accent-2-rgb), 0.2);
+    color: var(--accent-2);
+}
+
+.eyebrow {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 3rem 0 0;
+}
+
+/* =========================================
+   4. NAVIGATION & TOPBAR
+   ========================================= */
 .topbar {
     position: sticky;
     top: 0;
     z-index: 20;
     display: flex;
-    justify-content: space-between;  /* Brand left, nav+actions right on desktop */
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
     padding: 12px 5vw;
-    
-    transition: background 0.3s ease, border-color 0.3s ease;
+    transition: background 0.3s ease;
 }
 
-/* Add the glass effect to a pseudo-element so it doesn't trap the fixed menu */
+/* Glass effect background */
 .topbar::before {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: -1; /* Puts the background BEHIND the content */
+    z-index: -1;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     background: var(--glass-bg);
@@ -123,6 +236,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: inherit;
 }
 
+/* --- Brand --- */
 .brand {
     display: flex;
     align-items: baseline;
@@ -130,6 +244,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     letter-spacing: 0.02em;
     flex: 1;
+    /* Default flex behavior */
 }
 
 .brand__mark {
@@ -141,6 +256,7 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--muted);
 }
 
+/* --- Navigation Links (Desktop) --- */
 .topnav {
     display: flex;
     gap: 30px;
@@ -157,35 +273,37 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .topnav a:hover {
-    background: rgba(var(--text-rgb), 0.05); /* Adaptive hover */
+    background: rgba(var(--text-rgb), 0.05);
+}
+
+/* --- Right Side Actions --- */
+.topbar__right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex: 1;
 }
 
 .topbar__cta {
     white-space: nowrap;
 }
 
-
-.topbar__right {
-    display: flex;
+/* --- Mobile Specific Elements (Hidden by default) --- */
+.mobile-actions {
+    display: none;
+    /* Only flex on mobile */
     align-items: center;
-    justify-content: flex-end; /* Pushes buttons to the far right */
-    gap: 12px;
-    
-    /* NEW: Takes up equal space to balance the brand on the left */
-    flex: 1; 
+    gap: 16px;
+    z-index: 50;
+    position: relative;
 }
 
-/* Container for nav + right actions */
-.nav-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+.mobile-nav-header {
+    display: none;
 }
 
-/* Desktop: rely on flex with brand + nav-wrapper + right CTA.
-   Brand and CTA each flex:1 so nav visually centers. */
-
-/* Hamburger button - hidden on desktop, shown on mobile */
+/* Hamburger Button */
 .mobile-toggle {
     display: none;
     flex-direction: column;
@@ -196,11 +314,8 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     cursor: pointer;
     padding: 0;
-
-    /* --- NEW LINES TO FIX THE CROSS --- */
-    position: relative; 
-    z-index: 50; /* Higher than .nav-wrapper (40) */
-    
+    position: relative;
+    z-index: 50;
 }
 
 .mobile-toggle .bar {
@@ -211,18 +326,19 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* Animate hamburger into an "X" when open */
 .mobile-toggle.is-open .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
+
 .mobile-toggle.is-open .bar:nth-child(2) {
     opacity: 0;
 }
+
 .mobile-toggle.is-open .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Backdrop for off-canvas menu */
+/* Nav Backdrop */
 .nav-backdrop {
     position: fixed;
     inset: 0;
@@ -238,56 +354,25 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: auto;
 }
 
-/* Prevent body scroll when menu is open */
-body.menu-open {
-    overflow: hidden;
+/* Wrapper for Nav (Desktop default) */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
 
-
-/* --- CHIPS & TAGS --- */
-
-.chip {
-    padding: 6px 10px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    font-weight: 700;
-    background: rgba(var(--text-rgb), 0.04);
-    color: var(--text);
-}
-
-.chip--metric {
-    background: rgba(var(--accent-rgb), 0.1);
-    border-color: rgba(var(--accent-rgb), 0.2);
-    color: var(--accent); /* Optional: Color text to match */
-}
-
-.chip--tag {
-    background: rgba(var(--accent-2-rgb), 0.1);
-    border-color: rgba(var(--accent-2-rgb), 0.2);
-    color: var(--accent-2);
-}
-
-.eyebrow {
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--muted);
-    margin: 0 0 0px;
-    margin-top: 3rem;
-}
-
-/* --- HERO --- */
+/* =========================================
+   5. HERO SECTION
+   ========================================= */
 .hero {
     position: relative;
     padding: 120px 24px 100px;
     text-align: center;
     overflow: hidden;
-
-    min-height: 90vh;            /* Sets height to 85% of the screen */
-    display: flex;               /* Enables flexbox for alignment */
-    flex-direction: column;      /* Stacks text vertically */
-    justify-content: center;     /* Centers text vertically in the new height */
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .hero__title {
@@ -311,6 +396,7 @@ body.menu-open {
     justify-content: center;
 }
 
+/* Hero Background Elements */
 .hero__floating {
     position: absolute;
     pointer-events: none;
@@ -336,146 +422,64 @@ body.menu-open {
     filter: blur(0.2px);
 }
 
-.scroll-indicator {
-    margin-top: 48px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--muted);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-}
-
-/* --- Modern Bouncy Scroll Arrow --- */
-
+/* Scroll Trigger */
 .scroll-trigger {
     position: absolute;
     bottom: 30px;
     left: 50%;
-    /* Center it without using transform, so animation doesn't conflict */
-    margin-left: -28px; 
+    margin-left: -28px;
     z-index: 10;
-    text-decoration: none;
 }
 
 .scroll-trigger__circle {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    
-    /* Modern Glass Effect */
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent */
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.4);
-    
-    /* Colorful Glow Shadow */
     box-shadow: 0 8px 32px rgba(var(--accent-rgb), 0.3);
-    
-    /* Icon Alignment */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text); 
-    
-    /* The Spring Animation */
+    color: var(--text);
     animation: springBounce 2.5s infinite;
     transition: all 0.3s ease;
 }
 
-/* Hover Effect: Pop colors */
 .scroll-trigger:hover .scroll-trigger__circle {
     background: var(--panel);
     border-color: var(--accent);
     color: var(--accent);
-    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.6), 
-                0 0 40px rgba(var(--accent-2-rgb), 0.4);
     transform: scale(1.1);
 }
 
-/* Springy Bounce Animation */
 @keyframes springBounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateY(0);
     }
+
     40% {
-        transform: translateY(-15px) scale(1.05); /* Stretch up */
-        background: rgba(var(--accent-rgb), 0.1); /* Flash color */
+        transform: translateY(-15px) scale(1.05);
+        background: rgba(var(--accent-rgb), 0.1);
     }
+
     60% {
         transform: translateY(-7px);
     }
 }
 
-/* --- BUTTONS --- */
-
-/* Add this new class */
-.theme-toggle {
-    width: 32px;            /* Fixed width */
-    height: 32px;           /* Fixed height */
-    padding: 0;             /* Remove default padding */
-    border-radius: 50%;     
-    border: 0px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;         /* Prevent it from getting squished */
-    margin-left: 0; /* <--- ADD THIS LINE to separate it from the other button */
-}
-
-.theme-toggle:hover {
-    background: rgba(15, 23, 42, 0.05);
-    /* border-color: var(--accent); */
-    color: var(--accent);
-}
-
-.theme-toggle svg {
-    width: 16px;            /* Icon size */
-    height: 16px;
-    pointer-events: none;   /* Ensures clicks register on the button, not icon */
-}
-
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-weight: 600;
-    border: 1px solid transparent;
-    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
-    cursor: pointer;
-}
-
-.btn--solid {
-    background: linear-gradient(120deg, var(--accent), var(--accent-2));
-    color: #ffffff; /* Keep white text for contrast on gradients */
-    box-shadow: 0 15px 40px rgba(var(--accent-rgb), 0.3);
-}
-
-/* Ensure dark mode solid button text is legible if accents become very bright */
-.dark-mode .btn--solid {
-    color: #0f172a; 
-}
-
-.btn--ghost {
-    background: rgba(var(--accent-2-rgb), 0.08);
-    color: var(--accent-2);
-    border-color: rgba(var(--accent-2-rgb), 0.25);
-}
-
-.btn:hover {
-    transform: translateY(-1px);
-}
-
-/* --- SECTIONS --- */
-
+/* =========================================
+   6. SECTIONS & LAYOUTS
+   ========================================= */
 .section {
-    padding: 40px 5vw 60px; 
+    padding: 40px 5vw 60px;
 }
 
 .section--tight {
@@ -490,14 +494,9 @@ body.menu-open {
     width: 100%;
     margin: 0 0 32px;
     display: flex;
-    flex-direction: column;         /* Stack them vertically */
-    align-items: flex-start;        /* Align them to the left */
-    justify-content: center;        /* Remove space-between */
+    flex-direction: column;
+    align-items: flex-start;
     gap: 12px;
-}
-
-.section__title-wrap {
-    max-width: 720px;
 }
 
 .section__title {
@@ -510,14 +509,15 @@ body.menu-open {
     color: var(--muted);
 }
 
-/* --- SERVICES GRID --- */
-
+/* =========================================
+   7. SERVICES COMPONENT
+   ========================================= */
+/* Grid View */
 .service-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 16px;
     width: 100%;
-    margin: 0;
 }
 
 .service-card {
@@ -526,9 +526,9 @@ body.menu-open {
     padding: 20px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+    transition: transform 200ms ease, box-shadow 200ms ease;
     position: relative;
     overflow: hidden;
-    transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
 .service-card:hover {
@@ -574,14 +574,12 @@ body.menu-open {
     transform: translateX(4px);
 }
 
-/* --- DETAILS SCROLL --- */
-
+/* Detailed Sticky View */
 .services-scroll {
     display: flex;
     flex-direction: column;
-    gap: 40px; 
+    gap: 40px;
     width: 100%;
-    margin: 0;
 }
 
 .service-block {
@@ -591,12 +589,11 @@ body.menu-open {
     box-shadow: var(--shadow);
     display: grid;
     grid-template-columns: minmax(280px, 360px) 1fr;
-    gap: 0;
     overflow: hidden;
 }
 
 .service-sticky {
-    aspect-ratio: 1 / 3; 
+    aspect-ratio: 1 / 3;
     max-width: 360px;
     padding: 32px;
     position: sticky;
@@ -606,7 +603,6 @@ body.menu-open {
     justify-content: space-between;
     background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.05), rgba(var(--accent-2-rgb), 0.05));
     border-right: 1px solid var(--border);
-    border-radius: calc(var(--radius) + 4px);
 }
 
 .service-sticky h3 {
@@ -615,26 +611,12 @@ body.menu-open {
     font-size: 1.4rem;
 }
 
-.service-sticky p {
-    margin: 0;
-    color: var(--muted);
-}
-
-.service-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 24px;
-}
-
 .service-scroller {
     padding: 32px;
     display: grid;
     gap: 16px;
     grid-auto-rows: minmax(140px, auto);
-    background: radial-gradient(circle at 30% 10%, rgba(var(--accent-rgb), 0.05), transparent 35%),
-        radial-gradient(circle at 80% 20%, rgba(var(--accent-2-rgb), 0.05), transparent 35%),
-        var(--panel); /* Variable panel background */
+    background: var(--panel);
 }
 
 .service-item {
@@ -654,11 +636,6 @@ body.menu-open {
     margin: 0 0 6px;
 }
 
-.service-item__body {
-    margin: 0;
-    color: var(--muted);
-}
-
 .service-item__chip {
     font-size: 0.78rem;
     padding: 4px 8px;
@@ -668,8 +645,9 @@ body.menu-open {
     border: 1px solid var(--border);
 }
 
-/* --- TESTIMONIALS --- */
-
+/* =========================================
+   8. TESTIMONIALS
+   ========================================= */
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -702,37 +680,27 @@ body.menu-open {
     font-size: 0.95rem;
 }
 
-.testimonial-chip {
-    padding: 6px 10px;
-    border-radius: 10px;
-    background: rgba(var(--text-rgb), 0.06);
-    border: 1px solid var(--border);
-    font-weight: 700;
-    color: var(--text);
-}
-
-
-/* --- CONTACT SECTION (Updated for Variable Support) --- */
-
+/* =========================================
+   9. CONTACT FORM
+   ========================================= */
 .light-contact-section {
-    background-color: var(--bg); /* Variable BG */
+    background-color: var(--bg);
     padding: 5rem 1.5rem;
     display: flex;
     justify-content: center;
-    /* Optional: Ensure it creates a distinct section */
-    margin-top: 2rem; 
+    margin-top: 2rem;
 }
 
 .light-container {
     width: 100%;
     max-width: 1000px;
-    background: var(--panel); /* Variable Panel */
+    background: var(--panel);
     border-radius: 24px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--border); /* Added border for dark mode definition */
+    border: 1px solid var(--border);
 }
 
 @media (min-width: 850px) {
@@ -742,9 +710,7 @@ body.menu-open {
     }
 }
 
-/* Left Panel */
 .light-info {
-    /* Adaptive subtle background */
     background-color: rgba(var(--text-rgb), 0.02);
     padding: 3rem;
     flex: 1;
@@ -754,29 +720,11 @@ body.menu-open {
     justify-content: center;
 }
 
-.light-eyebrow {
-    color: var(--accent);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.75rem;
-    display: block;
-
-}
-
 .light-info h2 {
     font-size: 2.25rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1rem;
-    color: var(--text);
-}
-
-.light-info p {
-    color: var(--muted);
-    margin-bottom: 2.5rem;
-    font-size: 1.05rem;
 }
 
 .light-stat-grid {
@@ -790,15 +738,8 @@ body.menu-open {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 0.25rem;
 }
 
-.stat-item span {
-    font-size: 0.875rem;
-    color: var(--muted);
-}
-
-/* Right Panel */
 .light-form-wrapper {
     padding: 3rem;
     flex: 1.3;
@@ -815,31 +756,19 @@ body.menu-open {
 }
 
 @media (min-width: 600px) {
-    .form-grid { grid-template-columns: 1fr 1fr; }
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.input-group label {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text);
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .soft-input {
     width: 100%;
     padding: 0.875rem 1rem;
-    background-color: var(--bg-subtle); /* Defined in root */
+    background-color: var(--bg-subtle);
     border: 1px solid var(--border);
     border-radius: 10px;
-    font-size: 0.95rem;
     color: var(--text);
     transition: all 0.2s ease;
-    font-family: inherit;
 }
 
 .soft-input:focus {
@@ -849,36 +778,26 @@ body.menu-open {
     box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.15);
 }
 
-textarea.soft-input {
-    resize: vertical;
-    min-height: 120px;
-}
-
-.full-width { grid-column: 1 / -1; }
-
 .soft-btn {
-    background-color: var(--text); /* High contrast */
-    color: var(--panel); /* Invert text */
+    background-color: var(--text);
+    color: var(--panel);
     border: none;
     padding: 1rem 1.5rem;
     border-radius: 10px;
     font-weight: 600;
-    font-size: 1rem;
     cursor: pointer;
     transition: transform 0.1s, opacity 0.2s;
     width: 100%;
     margin-top: 1.5rem;
 }
 
-.soft-btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+.full-width {
+    grid-column: 1 / -1;
 }
 
-/* --- FOOTER --- */
-
-/* --- MODERN RESPONSIVE FOOTER --- */
-
+/* =========================================
+   10. FOOTER
+   ========================================= */
 .modern-footer {
     background: var(--panel);
     border-top: 1px solid var(--border);
@@ -888,15 +807,12 @@ textarea.soft-input {
 
 .footer-container {
     max-width: var(--max-width);
-    margin: 0 auto;
+    margin: 0 auto 60px;
     display: grid;
-    /* Desktop: 3 distinct columns */
-    grid-template-columns: 1.5fr 2fr 1.2fr; 
+    grid-template-columns: 1.5fr 2fr 1.2fr;
     gap: 60px;
-    margin-bottom: 60px;
 }
 
-/* Column General Styling */
 .footer-col {
     display: flex;
     flex-direction: column;
@@ -904,35 +820,24 @@ textarea.soft-input {
     align-items: flex-start;
 }
 
-.brand-col .brand {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-}
-
 .footer-col h4 {
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--text);
-    margin: 0 0 8px 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    margin: 0 0 8px 0;
 }
 
-.footer-desc {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 0;
-    max-width: 320px;
+.footer-links-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
 }
 
-/* Links Styling */
 .footer-col a:not(.btn) {
     color: var(--muted);
     font-size: 0.95rem;
-    text-decoration: none;
     transition: color 0.2s ease, transform 0.2s ease;
-    display: inline-block;
 }
 
 .footer-col a:not(.btn):hover {
@@ -940,14 +845,6 @@ textarea.soft-input {
     transform: translateX(4px);
 }
 
-/* Link Group Wrapper */
-.footer-links-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-}
-
-/* Social Icons */
 .social-icons {
     display: flex;
     gap: 12px;
@@ -960,18 +857,10 @@ textarea.soft-input {
     border-radius: 50%;
     background: var(--bg);
     border: 1px solid var(--border);
-    color: var(--muted);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
-
-    padding: 0;
-    margin: 0;
-    line-height: 0;
 }
-
-
 
 .footer-col a.social-link:hover {
     background: var(--accent);
@@ -980,7 +869,6 @@ textarea.soft-input {
     transform: translateY(-2px);
 }
 
-/* Bottom Copyright Bar */
 .footer-bottom {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -989,56 +877,13 @@ textarea.soft-input {
     text-align: center;
     color: var(--muted);
     font-size: 0.85rem;
-    opacity: 0.8;
 }
 
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 900px) {
-    .footer-container {
-        /* Switch to single column stack */
-        grid-template-columns: 1fr;
-        gap: 48px;
-    }
+/* =========================================
+   11. MEDIA QUERIES & RESPONSIVENESS
+   ========================================= */
 
-    .footer-links-group {
-        /* Keep links side-by-side on tablet/mobile if possible */
-        grid-template-columns: 1fr 1fr; 
-        gap: 20px;
-        width: 100%;
-    }
-    
-    .footer-desc {
-        max-width: 100%; /* Full width text on mobile */
-    }
-
-    .cta-col {
-        background: var(--bg); /* Slight highlight for CTA area on mobile */
-        padding: 24px;
-        border-radius: var(--radius);
-        align-items: center;
-        text-align: center;
-    }
-    
-    .cta-col .btn {
-        width: 100%; /* Full width button for easier tapping */
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-links-group {
-        /* On very small screens, stack the link lists too */
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-    
-    .modern-footer {
-        padding: 60px 20px 24px;
-    }
-}
-
-
-/* --- MEDIA QUERIES --- */
-
+/* --- Tablet / Large Mobile (Max 1024px) --- */
 @media (max-width: 1024px) {
     .service-block {
         grid-template-columns: 1fr;
@@ -1051,31 +896,37 @@ textarea.soft-input {
         border-bottom: 1px solid var(--border);
         border-radius: 0;
     }
-
-    .services-scroll {
-        gap: 32px;
-    }
 }
 
+/* --- Mobile (Max 768px) --- */
 @media (max-width: 768px) {
+
+    /* Topbar Layout */
     .topbar {
         flex-wrap: nowrap;
-        align-items: center;
         gap: 12px;
         padding: 10px 4vw;
     }
 
     .brand {
         flex: 0 1 auto;
-        justify-content: flex-start;
-        align-items: center;
+    }
+
+    /* Mobile Controls (Ham + Theme) */
+    .mobile-actions {
+        display: flex;
     }
 
     .mobile-toggle {
         display: flex;
     }
 
-    /* Off-canvas full-screen drawer */
+    /* Hide Desktop Elements */
+    .desktop-theme-btn {
+        display: none;
+    }
+
+    /* Off-Canvas Navigation Drawer */
     .nav-wrapper {
         position: fixed;
         inset: 0;
@@ -1083,7 +934,7 @@ textarea.soft-input {
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        padding: 80px 24px 24px;
+        padding: 40px 24px 24px;
         gap: 24px;
         transform: translateX(100%);
         transition: transform 0.3s ease;
@@ -1094,15 +945,15 @@ textarea.soft-input {
         transform: translateX(0);
     }
 
-
-
-
-
-    .mobile-menu-subtitle {
+    /* Mobile Nav Styles */
+    .mobile-nav-header {
         display: block;
-        font-size: 1.1rem;
-        font-weight: 600;
+        font-size: 1.4rem;
+        font-weight: 700;
         color: var(--text);
+        padding-bottom: 24px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid var(--border);
     }
 
     .topnav {
@@ -1118,11 +969,11 @@ textarea.soft-input {
         font-size: 1.05rem;
     }
 
+    /* Right side buttons inside header */
     .topbar__right {
         margin-top: auto;
         width: 100%;
         justify-content: flex-start;
-        gap: 10px;
         flex: 0 0 auto;
     }
 
@@ -1130,6 +981,8 @@ textarea.soft-input {
         flex: 1;
         text-align: center;
     }
+
+    /* Hero & Sections */
     .hero {
         padding: 80px 20px 70px;
     }
@@ -1144,95 +997,62 @@ textarea.soft-input {
     }
 
     .section__header {
-        flex-direction: column;
         align-items: flex-start;
+    }
+
+    /* Footer stacking */
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .footer-links-group {
+        width: 100%;
+    }
+
+    .footer-desc {
+        max-width: 100%;
     }
 
     .footer__cta {
         justify-self: start;
     }
-}
 
-/* --- MOBILE ACTIONS WRAPPER --- */
-/* Groups the Hamburger and Mobile Theme Toggle */
-.mobile-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    z-index: 50; /* Keeps it above the menu overlay */
-    position: relative;
-}
-
-/* By default (Desktop), hide the mobile actions group */
-.mobile-actions {
-    display: none; 
-}
-
-/* By default (Desktop), hide the mobile menu header */
-.mobile-nav-header {
-    display: none;
-}
-
-/* --- MOBILE RESPONSIVENESS (Max-width 768px) --- */
-@media (max-width: 768px) {
-    
-    /* Show the Mobile Group (Hamburger + Moon) */
-    .mobile-actions {
-        display: flex; 
-    }
-
-    /* Hide the DESKTOP Theme Toggle inside the menu */
-    .desktop-theme-btn {
-        display: none;
-    }
-
-    /* Show and Style the Mobile Menu Header */
-    .mobile-nav-header {
-        display: block;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--text);
-        padding-bottom: 24px;
-        margin-bottom: 16px;
-        border-bottom: 1px solid var(--border);
-    }
-    
-    /* Adjust nav-wrapper padding so the new header fits nicely */
-    .nav-wrapper {
-        padding-top: 40px; /* Reduced from 80px */
+    .cta-col .btn {
+        width: 100%;
     }
 }
 
+/* --- Small Mobile (Max 480px) --- */
+@media (max-width: 480px) {
+    .footer-links-group {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
 
-/* --- DESKTOP NAVIGATION CENTERING --- */
+    .modern-footer {
+        padding: 60px 20px 24px;
+    }
+}
+
+/* --- Desktop Specific (Min 769px) --- */
 @media (min-width: 769px) {
-    
-    /* 1. Stop the brand from pushing everything to the right */
+
+    /* Absolute centering for navbar */
     .brand {
-        flex: 0 0 auto; /* Only take up necessary width */
+        flex: 0 0 auto;
     }
 
-    /* 2. Detach the navigation and force it to the center */
     .topnav {
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        margin: 0; /* Remove any previous margins */
+        margin: 0;
         white-space: nowrap;
     }
 
-    /* 3. Ensure the container handles the absolute element correctly */
-    .topbar {
-        position: sticky; /* Keeps the stacking context for absolute centering */
-        justify-content: space-between; /* Pushes Brand Left, Buttons Right */
-    }
-
-    /* 4. Ensure nav-wrapper doesn't block clicks */
     .nav-wrapper {
-        flex: 0 0 auto; /* Don't grow */
-        display: flex;
-        align-items: center;
-        gap: 24px;
+        flex: 0 0 auto;
     }
 }

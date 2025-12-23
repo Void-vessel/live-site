@@ -1,4 +1,10 @@
-// Centralized service data used for both the overview grid and the pinned sections
+/**
+ * Global Content Data
+ * Source of truth for Services, Testimonials, and Projects.
+ */
+
+// 1. Services Data
+// used for the overview grid and pinned sections
 const services = [
     {
         slug: "ecommerce",
@@ -6,8 +12,7 @@ const services = [
         summary: "End-to-end Shopify/Etsy upkeep, tuned for velocity and margin.",
         description: "From launch to monthly iterations: product drops, promos, reporting, and CRO tweaks that keep the shop profitable.",
         accent: "#0bd3d3",
-        bg : "/images/ecom_sticky.png",
-        // badges: ["Shopify", "Etsy", "CRO"],
+        bg: "/images/ecom_sticky.png",
         items: [
             {
                 label: "Ops runway",
@@ -37,7 +42,6 @@ const services = [
         summary: "SEO-forward listing builds that surface faster and convert better.",
         description: "Keyword research meets sharp copy, clean media, and variant clarity so every SKU is easy to buy.",
         accent: "#7c3aed",
-        // badges: ["SEO", "Conversion", "Research"],
         items: [
             {
                 label: "Keyword canvas",
@@ -67,7 +71,6 @@ const services = [
         summary: "Graphics and thumbnails that stay on-brand and thumb-stopping.",
         description: "Design sprints with style guides, reusable templates, and export packs for every platform.",
         accent: "#0ea5e9",
-        // badges: ["Design", "Templates", "Thumbnails"],
         items: [
             {
                 label: "Style DNA",
@@ -97,7 +100,6 @@ const services = [
         summary: "Voice-consistent copy that sells without feeling pushy.",
         description: "Messaging frameworks, landing flows, and microcopy that keep customers moving forward.",
         accent: "#f97316",
-        // badges: ["Voice", "Landing", "Email"],
         items: [
             {
                 label: "Voice kit",
@@ -123,7 +125,8 @@ const services = [
     }
 ];
 
-// Testimonials used for the mid-page social proof section
+// 2. Testimonials Data
+// used for the mid-page social proof section
 const testimonials = [
     {
         name: "Amira Patel",
@@ -151,7 +154,8 @@ const testimonials = [
     }
 ];
 
-// Light-weight project snapshots to keep the page fast
+// 3. Projects Data
+// used for project snapshots
 const projects = [
     {
         title: "Etsy Thumbnail Refresh",
@@ -176,7 +180,12 @@ const projects = [
     }
 ];
 
-// expose for inline scripts
-window.services = services;
-window.testimonials = testimonials;
-window.projects = projects;
+// Expose to window for global access
+if (typeof window !== 'undefined') {
+    window.services = services;
+    window.testimonials = testimonials;
+    window.projects = projects;
+}
+
+// Optional: Export for module environments
+// export { services, testimonials, projects };
