@@ -125,57 +125,62 @@
                 <div class="services-scroll" id="services-scroll"></div>
             </section>
 
-            <section id="contact" class="light-contact-section">
-                <div class="light-container">
+            <section id="contact" class="contact-section">
+                <div class="contact-container">
 
-                    <div class="light-info">
-                        <div>
-                            <span class="light-eyebrow">Get in touch</span>
-                            <h2>Let's level up your brand.</h2>
-                            <p>We help e-commerce brands scale through better visuals and clearer messaging.</p>
+                    <div class="contact-info">
+                        <div class="info-header">
+                            <span class="chip chip--metric">Open for new projects</span>
+                            <h2>Let's build something iconic.</h2>
+                            <p>Tell us about your goals, timeline, and budget. We'll get back to you within 24 hours.
+                            </p>
                         </div>
 
-                        <div class="light-stat-grid">
-                            <div class="stat-item">
-                                <h4>24h</h4>
-                                <span>Response time</span>
+                        <div class="info-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Email</span>
+                                <a href="mailto:hello@tinopia.com">hello@tinopia.com</a>
                             </div>
-                            <div class="stat-item">
-                                <h4>150+</h4>
-                                <span>Projects launched</span>
+                            <div class="detail-item">
+                                <span class="detail-label">Socials</span>
+                                <div class="social-row">
+                                    <a href="#">LinkedIn</a> / <a href="#">Twitter</a> / <a href="#">Instagram</a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="light-form-wrapper">
-                        <form id="modern-form" action="https://formspree.io/f/mbdrrbkk" method="POST"
-                            onsubmit="handleFormSubmit(event)">
-                            <div class="form-grid">
-                                <div class="input-group">
-                                    <label for="fname">First Name</label>
-                                    <input type="text" id="fname" name="fname" class="soft-input" placeholder="Jane"
+                    <div class="contact-form-wrapper">
+                        <form class="contact-form" onsubmit="event.preventDefault();">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" class="soft-input" placeholder="Jane Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="soft-input" placeholder="jane@company.com"
                                         required>
-                                </div>
-                                <div class="input-group">
-                                    <label for="lname">Last Name</label>
-                                    <input type="text" id="lname" name="lname" class="soft-input" placeholder="Doe"
-                                        required>
-                                </div>
-
-                                <div class="input-group full-width">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" class="soft-input"
-                                        placeholder="jane@company.com" required>
-                                </div>
-
-                                <div class="input-group full-width">
-                                    <label for="message">How can we help?</label>
-                                    <textarea id="message" name="message" class="soft-input"
-                                        placeholder="Tell us about your project goals..." required></textarea>
                                 </div>
                             </div>
 
-                            <button type="submit" class="soft-btn">Send Message</button>
+                            <div class="form-group">
+                                <label for="service">Service Interest</label>
+                                <select id="service" class="soft-input">
+                                    <option value="" disabled selected>Select a service...</option>
+                                    <option value="ecom">E-commerce Management</option>
+                                    <option value="listings">Listing Optimization</option>
+                                    <option value="creative">Creative Services</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Project Details</label>
+                                <textarea id="message" class="soft-input" rows="4"
+                                    placeholder="Tell us about the project..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn--solid full-width">Send Message</button>
                         </form>
                     </div>
 
