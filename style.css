@@ -1202,14 +1202,13 @@ h6 {
 }
 
 /* Dark Mode Logic */
-[data-theme="dark"] .logo-light {
+.dark-mode .logo-light {
     display: none;
 }
 
-[data-theme="dark"] .logo-dark {
+.dark-mode .logo-dark {
     display: block;
 }
-
 
 
 /* --- TYPOGRAPHY UPDATES --- */
@@ -1269,7 +1268,7 @@ h6 {
         padding-right: 0;
 
         /* FORCE Animation on Mobile */
-        animation: scrollMarquee 25s linear infinite !important;
+        animation: scrollMarquee 45s linear infinite !important;
 
         /* Trick iOS into handling touch events */
         cursor: pointer;
@@ -1292,8 +1291,8 @@ h6 {
        3. CARD VISIBILITY (Always Open)
        ========================================= */
     .testimonial-card-v2 {
-        flex: 0 0 280px;
-        height: 320px;
+        flex: 0 0 240px;
+        height: 280px;
         margin-right: 0;
 
         /* Ensure the card itself triggers the pause when touched */

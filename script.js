@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cardsHtml = window.testimonials.map(createCardHtml).join('');
 
         // 4. DUPLICATE content for infinite loop (Set A + Set B)
-        track.innerHTML = cardsHtml + cardsHtml + cardsHtml + cardsHtml;
+        track.innerHTML = cardsHtml + cardsHtml;
     };
 
 
