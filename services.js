@@ -149,7 +149,7 @@ const testimonials = [
         logo_light: "images/LOGOS/LIGHT MODE/electroconsult_light.png",
         logo_dark: "images/LOGOS/DARK MODE/electroconsult_dark.png",
         quote: "They completely transformed our guest experience; the cohesive branding across our amenities and suites screams modern luxury.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/posterwala_light.png",
@@ -161,61 +161,61 @@ const testimonials = [
         logo_light: "images/LOGOS/LIGHT MODE/ananas_light.png",
         logo_dark: "images/LOGOS/DARK MODE/ananas_dark.png",
         quote: "We needed a logo that felt fresh and inviting, and this design delivers on every level.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/kagazpatar_light.png",
         logo_dark: "images/LOGOS/DARK MODE/kagazpatar_dark.png",
         quote: "Simple yet full of personality; this logo makes our brand feel approachable, artistic, and instantly memorable.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/germanstreetfood_light.png",
         logo_dark: "images/LOGOS/DARK MODE/germanstreetfood_dark.png",
         quote: "The playful, bold branding perfectly captures the energy of our fast-food chain and makes our menu instantly recognizable.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/hmu_light.png",
         logo_dark: "images/LOGOS/DARK MODE/hmu_dark.png",
         quote: "Super creative and memorable; the bubbly, 3D style is exactly what we needed to stand out to our subscribers.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/sendrbud_light.png",
         logo_dark: "images/LOGOS/DARK MODE/sendrbud_dark.png",
         quote: "A fresh, iconic identity that fits the energy of our new collection perfectly—clean, sharp, and memorable.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/factotum_light.png",
         logo_dark: "images/LOGOS/DARK MODE/factotum_dark.png",
         quote: "We wanted a modern identity, and [Your Name] delivered a sleek logo that gives our brantd a sophisticated edge.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/thepulse_light.png",
         logo_dark: "images/LOGOS/DARK MODE/thepulse_dark.png",
         quote: "The comprehensive branding and packaging design elevated our hotel's guest experience to a true 5-star level.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/akanlar_light.png",
         logo_dark: "images/LOGOS/DARK MODE/akanlar_dark.png",
         quote: "From listing SEO to shop aesthetics, their management completely revitalized our presence on Etsy.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/spect_light.png",
         logo_dark: "images/LOGOS/DARK MODE/spect_dark.png",
         quote: "They seamlessly blended English and Urdu typography into a modern identity that speaks directly to our diverse audience.",
-        rating: 4
+        rating: 5
     },
     {
         logo_light: "images/LOGOS/LIGHT MODE/highdesert_light.png",
         logo_dark: "images/LOGOS/DARK MODE/highdesert_dark.png",
         quote: "They took our channel's branding to the next level with a design that looks just as professional as the top creators on the platform.",
-        rating: 4
+        rating: 5
     }
 ];
 
@@ -249,7 +249,7 @@ const testimonials = [
 if (typeof window !== 'undefined') {
     window.services = services;
     window.testimonials = testimonials;
-    window.projects = projects;
+    // window.projects = projects;
 }
 
 // Optional: Export for module environments
