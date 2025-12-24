@@ -854,17 +854,55 @@ h6 {
    ========================================= */
 
 /* --- Tablet / Large Mobile (Max 1024px) --- */
+/* --- Tablet / Mobile Layout (Fixes the "Jumbled" Sticky Bar) --- */
 @media (max-width: 1024px) {
+
     .service-block {
-        grid-template-columns: 1fr;
+        /* Stack vertically instead of side-by-side */
+        display: flex;
+        flex-direction: column;
+
+        /* Remove strict grid sizing that might cause overflow */
+        width: 100%;
+        max-width: 100%;
     }
 
     .service-sticky {
-        position: static;
+        /* 1. DISABLE STICKY BEHAVIOR */
+        position: relative;
+        top: auto;
+
+        /* 2. CRITICAL FIX: Reset the huge height */
+        aspect-ratio: auto;
+        /* Stops it from being 3x screen height */
         height: auto;
+        max-width: 100%;
+
+        /* 3. Visuals */
         border-right: none;
         border-bottom: 1px solid var(--border);
-        border-radius: 0;
+        border-radius: var(--radius) var(--radius) 0 0;
+        /* Rounded top only */
+        padding: 30px 20px;
+        /* Comfortable padding */
+
+        /* Optional: Add a subtle background so it looks like a header */
+        background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.08), transparent);
+    }
+
+    .service-sticky h3 {
+        padding-top: 0;
+        /* Remove the huge top gap */
+        margin-top: 0;
+        font-size: 1.5rem;
+    }
+
+    .service-scroller {
+        /* Reset spacing for mobile */
+        padding: 20px;
+        gap: 16px;
+        background: var(--bg-subtle);
+        /* Slight contrast */
     }
 }
 
